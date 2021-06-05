@@ -91,7 +91,7 @@
 					</div>
 					<!-- /.card-header -->
 					<!-- form start -->
-					<form id="formularioProductoRegistro" th:object="${reg}" th:action="@{registrar}" enctype="multipart/form-data" method="post">
+					<form id="formularioProductoRegistro" th:object="${reg}" th:action="@{/producto/registrar}" enctype="multipart/form-data" method="post">
 						<div class="card-body">
 
 							<div class="row m-auto  col-md-12">
@@ -186,7 +186,7 @@
 						<div class="card-footer d-flex justify-content-center">
 							<button type="submit" class="btn btn-success mr-5">Registrar
 								Producto</button>
-							<a th:href="@{listar}" class="btn btn-secondary">Volver al
+							<a th:href="@{/producto/listar}" class="btn btn-secondary">Volver al
 								Listado</a>
 						</div>
 					</form>

@@ -9,16 +9,16 @@ import javax.persistence.Table;
 public class Marca {
 
 	@Id
-	private int codigo;
+	private String codigo;
 	
 	private String nombre;
 	
 	private int estado;
 	
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 	public String getNombre() {

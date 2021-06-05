@@ -1,7 +1,7 @@
 package pe.com.mundotecnologico.servicio;
 
+import java.text.DecimalFormat;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import pe.com.mundotecnologico.repositorio.IProductoRepository;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
-
+	
 	@Autowired
 	private IProductoRepository repo;
 	
@@ -21,10 +21,10 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public Producto eliminarProducto(int codigo) {
-		Optional<Producto> reg = repo.findById(codigo);
-		reg.get().setEstado(2);
-		return registraActualizaProducto(reg.get());
+	public Producto eliminarProducto(String codigo) {
+		Producto reg = buscarProducto(codigo);
+		reg.setEstado(2);
+		return registraActualizaProducto(reg);
 	}
 
 	@Override
@@ -33,8 +33,33 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public Optional<Producto> buscarProducto(int codigo) {
-		return repo.findById(codigo);
+	public Producto buscarProducto(String codigo) {
+		return repo.findById(codigo).get();
+	}
+
+	@Override
+	public int getCantidadRegistros() {
+		return (int) repo.count();
+	}
+
+	@Override
+	public String generarCodigo() {
+		String codigo = "PRO0001";
+		if(getCantidadRegistros() > 1) {
+			DecimalFormat df = new DecimalFormat("0000");
+			codigo = "PRO" + df.format(getCantidadRegistros() + 1);
+		}
+		return codigo;
+	}
+
+	@Override
+	public String generarCodigo(int numeroCodigo) {
+		String codigo = "PRO0001";
+		if(numeroCodigo > 1) {
+			DecimalFormat df = new DecimalFormat("0000");
+			codigo = "PRO" + df.format(numeroCodigo);
+		}
+		return codigo;
 	}
 
 }

@@ -129,7 +129,7 @@ function ConfirmarDelete(e, codigo) {
                 showConfirmButton: false,
                 timer: 1500
             })
-            setTimeout(function () { window.location.href = 'Eliminar/' + codigo ; }, 1500);
+            setTimeout(function () { window.location.href = 'eliminar/' + codigo ; }, 1500);
         }
     })
 }

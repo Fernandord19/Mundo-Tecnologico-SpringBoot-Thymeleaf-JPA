@@ -13,14 +13,14 @@ import javax.persistence.Table;
 public class Producto {
 	
 	@Id
-	private int codigo;
+	private String codigo;
 	private String foto;
 	private String nombre;	
 	private String descripcion;
 	private double precio;
 	private int stock;	
 	private int estado;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_marca")
 	private Marca marca;
@@ -29,11 +29,16 @@ public class Producto {
 	@JoinColumn(name = "codigo_categoria")
 	private Categoria categoria;
 
-	public int getCodigo() {
+	
+	public int getNumeroCodigo() {
+		return Integer.parseInt(codigo.substring(3));
+	}
+
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
@@ -104,9 +109,11 @@ public class Producto {
 	@Override
 	public String toString() {
 		return "Producto [codigo=" + codigo + ", foto=" + foto + ", nombre=" + nombre + ", descripcion=" + descripcion
-				+ ", precio=" + precio + ", stock=" + stock + ", estado=" + estado + ", codigo_categoria="
-				+ categoria + ", marca=" + marca + "]";
+				+ ", precio=" + precio + ", stock=" + stock + ", estado=" + estado + ", marca=" + marca + ", categoria="
+				+ categoria + "]";
 	}
+
+
 	
 	
 	

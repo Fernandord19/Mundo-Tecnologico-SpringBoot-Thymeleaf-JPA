@@ -11,19 +11,22 @@ public class FileUploadUtil {
 	public static void saveFile(String nombreArchivo, MultipartFile multipartFile) throws IOException {
 
 		String directorioBase = getDirectorioBase();
-		
+
 		Path uploadPath = Paths.get(directorioBase + "\\src\\main\\resources\\static\\img");
 
 		if (!Files.exists(uploadPath)) {
 			Files.createDirectories(uploadPath);
 		}
 
-		try (InputStream inputStream = multipartFile.getInputStream()) {
-			Path filePath = uploadPath.resolve(nombreArchivo);
-			Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException ioe) {
-			throw new IOException("Could not save image file: " + nombreArchivo, ioe);
+		if(multipartFile.getSize() > 0) {
+			try (InputStream inputStream = multipartFile.getInputStream()) {
+				Path filePath = uploadPath.resolve(nombreArchivo);
+				Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException ioe) {
+				throw new IOException("Could not save image file: " + nombreArchivo, ioe);
+			}
 		}
+
 	}
 
 	private static String getDirectorioBase() {
