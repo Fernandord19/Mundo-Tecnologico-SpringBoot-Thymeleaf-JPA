@@ -1,0 +1,184 @@
+<!doctype html>
+<html xmlns:th=" http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Registrar Marca | Mundo Tecnológico</title>
+
+<!-- Bootstrap -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" th:href="@{/css/general.css}">
+
+<!-- DataTables -->
+<link rel="stylesheet" th:href="@{/css/dataTables.bootstrap4.css}">
+<link rel="stylesheet" th:href="@{/css/responsive.bootstrap4.css}">
+<link rel="stylesheet" th:href="@{/css/buttons.bootstrap4.min.css}">
+
+<!-- Fuente -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap"
+	rel="stylesheet">
+<body>
+	<div class="header">
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">Mundo Tecnológico</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Catálogo</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="#">Nosotros</a>
+					</li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">Mantenimiento</a>
+
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Productos</a>
+							<a class="dropdown-item"
+								href="ServletUsuario?operacion=listarMantenimiento">Usuarios</a>
+							<a class="dropdown-item"
+								href="ServletCategoria?operacion=listarMantenimiento">Categorías</a>
+							<a class="dropdown-item"
+								href="ServletMarca?operacion=listarMantenimiento">Marcas</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">Reportes</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Productos</a> <a
+								class="dropdown-item" href="#">Ventas</a> <a
+								class="dropdown-item" href="#">Usuarios</a> <a
+								class="dropdown-item" href="#">Clientes</a>
+						</div></li>
+
+				</ul>
+				<ul class="navbar-nav ml-auto">
+
+					<li class="nav-item dropdown mr-auto"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> <i class="fas fa-user"></i> Iniciar
+							Sesión
+					</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Mi Cuenta</a> <a
+								class="dropdown-item"
+								href="ServletUsuario?operacion=cerrarSesion">Cerrar Sesión</a>
+						</div></li>
+				</ul>
+			</div>
+		</nav>
+
+	</div>
+	<div class="contenido">
+		<div class="container-fluid contenedor_mantenimiento">
+			<div class="col-md-6 m-auto formulario_mantenimiento">
+				<div class="card card-primary">
+					<div class="card-header">
+						<h3 class="card-title text-center">Registrar Marca</h3>
+					</div>
+					<!-- /.card-header -->
+					<form th:action="@{guardar}" th:object="${reg}" method="post">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="codigo">Código</label> <input class="form-control"
+									readonly="readonly" id="codigo" value="Autogenerado">
+							</div>
+
+							<div class="form-group">
+								<label for="marca">Nombre</label> <input th:field="*{nombre}"
+									class="form-control" id="marca" required="required"
+									maxlength="25">
+							</div>
+
+							<div class="form-row">
+
+								<div class="form-group col-md-12">
+
+									<label for="codigo_chofer">Estado</label> <select
+										th:field="*{estado}" class="custom-select" id="estado">
+										<option th:value="0" th:text="Seleccione" th:selected="true"
+											disabled="disabled" />
+										<option th:value="1" th:text="Activo" th:selected="false" />
+										<option th:value="2" th:text="Eliminado" th:selected="false" />
+									</select>
+
+								</div>
+
+							</div>
+
+						</div>
+						<div class="card-footer d-flex justify-content-center">
+							<button type="submit" class="btn btn-success mr-5">Registrar
+								Marca</button>
+							<a th:href="@{listar}" class="btn btn-secondary">Volver al
+								Listado</a>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="text-center bg-dark">
+		<div class="">
+			<!-- Facebook -->
+			<a class="btn btn-link btn-floating btn-lg m-1 text-light " href="#!"
+				role="button" data-mdb-ripple-color="light"><i
+				class="fab fa-facebook-f"></i></a>
+
+			<!-- Twitter -->
+			<a class="btn btn-link btn-floating btn-lg m-1 text-light " href="#!"
+				role="button" data-mdb-ripple-color="dark"><i
+				class="fab fa-twitter"></i></a>
+
+			<!-- Instagram -->
+			<a class="btn btn-link btn-floating btn-lg m-1 text-light " href="#!"
+				role="button" data-mdb-ripple-color="dark"><i
+				class="fab fa-instagram"></i></a>
+		</div>
+		<!-- Copyright -->
+		<div class="text-center text-light">
+			© 2021 <a class="text-light" href="#">Mundo Tecnológico</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Font Awesome-->
+	<script src="https://kit.fontawesome.com/7eb0bd06bd.js"></script>
+
+	<!-- JQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+	<!-- Bootstrap -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- DataTables  & Plugins -->
+	<script th:src="@{/js/jquery.dataTables.js}"></script>
+	<script th:src="@{/js/dataTables.bootstrap4.js}"></script>
+	<script th:src="@{/js/dataTables.responsive.js}"></script>
+	<script th:src="@{/js/responsive.bootstrap4.js}"></script>
+
+	<!-- jquery-validation -->
+	<script th:src="@{/js/jquery.validate.js}"></script>
+	<script th:src="@{/js/additional-methods.js}"></script>
+
+	<!-- Swee Alert -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<!-- JS -->
+	<script th:src="@{/js/general.js}"></script>
+</body>
+</html>
