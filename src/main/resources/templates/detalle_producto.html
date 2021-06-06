@@ -118,10 +118,6 @@
 
 						<dd th:text="${reg.stock}"></dd>
 
-						<dt>ESTADO</dt>
-
-						<dd th:text="${reg.estado == 1} ? 'Activo': 'Eliminado'"></dd>
-
 						<dt>MARCA</dt>
 
 						<dd th:text="${reg.marca.nombre}"></dd>
@@ -129,6 +125,10 @@
 						<dt>CATEGORÍA</dt>
 
 						<dd th:text="${reg.categoria.nombre}"></dd>
+				
+						<dt>ESTADO</dt>
+
+						<dd th:text="${reg.estado == 1} ? 'Activo': 'Eliminado'"></dd>
 
 					</dl>
 					<div class="card-footer d-flex justify-content-center">

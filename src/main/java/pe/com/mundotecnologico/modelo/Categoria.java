@@ -15,6 +15,10 @@ public class Categoria {
 	
 	private int estado;
 	
+	public int getNumeroCodigo() {
+		return Integer.parseInt(codigo.substring(3));
+	}
+	
 	public String getCodigo() {
 		return codigo;
 	}

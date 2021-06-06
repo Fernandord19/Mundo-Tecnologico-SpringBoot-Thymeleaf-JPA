@@ -33,7 +33,7 @@ $(document).on('click', '.number-spinner button', function () {
 $(function () {
     $('#dataTable').DataTable({
         "order": [[0, "asc"]],
-        "lengthMenu": [[15, 30, 45, -1], [15, 30, 45, "All"]]
+        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
     });
 });
 
@@ -253,6 +253,43 @@ $(function () {
         }
     });
 });
+
+$(function () {
+    $('#formularioCategoria').validate({
+        rules: {
+            nombre: {
+                required: true,
+                minlength: 2,
+                maxlength: 30
+            },
+            estado: {
+            	required: true,
+            }
+        },
+        messages: {
+            nombre: {
+                required: "Este campo es obligatorio",
+                minlength: "El nombre debe tener mínimo 2 caracteres",
+                maxlength: "El nombre debe tener máximo 30 caracteres"
+            },
+            estado: {
+                required: "Este campo es obligatorio",
+            },
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+    });
+});
+
 
 $(function () {
     $('#formularioLogin').validate({

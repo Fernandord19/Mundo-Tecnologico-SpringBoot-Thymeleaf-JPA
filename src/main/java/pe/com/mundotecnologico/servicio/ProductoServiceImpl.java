@@ -45,7 +45,7 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public String generarCodigo() {
 		String codigo = "PRO0001";
-		if(getCantidadRegistros() > 1) {
+		if(getCantidadRegistros() > 0) {
 			DecimalFormat df = new DecimalFormat("0000");
 			codigo = "PRO" + df.format(getCantidadRegistros() + 1);
 		}
@@ -55,7 +55,7 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public String generarCodigo(int numeroCodigo) {
 		String codigo = "PRO0001";
-		if(numeroCodigo > 1) {
+		if(numeroCodigo > 0) {
 			DecimalFormat df = new DecimalFormat("0000");
 			codigo = "PRO" + df.format(numeroCodigo);
 		}

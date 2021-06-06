@@ -89,7 +89,7 @@
 
 	<div class="contenido">
 
-		<div class="contenedor_mantenimiento col-md-9 m-auto">
+		<div class="contenedor_mantenimiento col-md-6 m-auto">
 			<div class="card card-primary">
 				<div class="card-header text-center">
 					<h2 class="">Listado de Marcas</h2>
@@ -115,17 +115,13 @@
 								<td th:text="${m.codigo}"></td>
 								<td th:text="${m.nombre}"></td>
 								<td th:text="${m.estado == 1} ? 'Activo' : 'Eliminado'" />
-								<td class="text-center">
-									<a th:href="@{editar(codigo=${m.codigo})}">
-										<i class="fas fa-edit"></i>
-									</a> 
-									<a href="#" style="color: green">
-										<i class="fas fa-info-circle"></i>
-									</a> 
-									<a href="#" style="color: red" th:onclick="'ConfirmarDelete(event,\''+ ${m.codigo} +'\')'"> 
+								<td class="text-center"><a
+									th:href="@{editar/{codigo}(codigo = ${m.codigo})}"><i
+										class="fas fa-edit"></i></a> <a th:href="@{/marca/detalle/{codigo}(codigo=${m.codigo})}" style="color: green"><i
+										class="fas fa-info-circle"></i></a><a href="#" style="color: red"
+									th:onclick="'javascript:ConfirmarDelete(event,\'' + ${m.numeroCodigo} + '\')'">
 										<i class="fas fa-trash-alt"></i>
-									</a>
-								</td>
+								</a></td>
 							</tr>
 						</tbody>
 					</table>

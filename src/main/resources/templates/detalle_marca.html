@@ -2,8 +2,7 @@
 <html xmlns:th=" http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Listado de Marcas | Mundo Tecnológico</title>
-
+<title>Detalle Marca | Mundo Tecnológico</title>
 
 <!-- Bootstrap -->
 <link rel="stylesheet"
@@ -20,10 +19,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap"
 	rel="stylesheet">
-
-</head>
 <body>
-
 	<div class="header">
 
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -86,69 +82,44 @@
 		</nav>
 
 	</div>
-
 	<div class="contenido">
-
-		<div class="contenedor_mantenimiento col-md-11 m-auto">
-			<div class="card card-primary">
-				<div class="card-header text-center">
-					<h2 class="">Listado de Productos</h2>
-					<a th:href="@{/producto/registrar}" class="btn btn-primary">Nuevo
-						Registro</a>
-				</div>
-
-				<div class="card-body">
-					<table id="dataTable" class="table table-sm table-hover dt-responsive wrap" style="width:100%">
-						<thead>
-							<tr>
-								<th style="width: 5%;">CÓDIGO</th>
-								<th style="width: 5%">FOTO</th>
-								<th class="wrap" style="width: 48%;">NOMBRE</th>
-								<th style="width: 5%;">PRECIO</th>
-								<th style="width: 5%;">STOCK</th>
-								<th style="width: 5%;">MARCA</th>
-								<th style="width: 12%;">CATEGORÍA</th>
-								<th style="width: 5%;">ESTADO</th>
-								<th style="width: 10%;">OPERACIONES</th>
-							</tr>
-						</thead>
-						<tbody>
-
-							<tr th:each="p :${listaProductos}">
-								<td th:text="${p.codigo}"></td>
-								<td><a class="popUpImage" th:href="${p.foto}">Ver Foto</a></td>
-								<td th:text="${p.nombre}"></td>
-								<td th:text="${p.precio}"></td>
-								<td th:text="${p.stock}"></td>
-								<td th:text="${p.marca.nombre}"></td>
-								<td th:text="${p.categoria.nombre}"></td>
-								<td th:text="${p.estado == 1} ? 'Activo' : 'Eliminado'" />
-								<td class="text-center"><a
-									th:href="@{editar/{codigo}(codigo = ${p.codigo})}"> <i
-										class="fas fa-edit"></i>
-								</a> <a th:href="@{/producto/detalle/{codigo}(codigo = ${p.codigo})}"
-									style="color: green"> <i class="fas fa-info-circle"></i>
-								</a> <a href="#" style="color: red"
-									th:onclick="'ConfirmarDelete(event,\'' + ${p.numeroCodigo} + '\')'">
-										<i class="fas fa-trash-alt"></i>
-								</a></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-
-			<div class="modal fade" tabindex="-1">
-				<div class="modal-dialog modal-md modal-dialog-centered">
-					<div class="modal-content">
-						<img src="" class="foto">
+		<div class="container-fluid contenedor_mantenimiento">
+			<div class="col-md-6 m-auto formulario_mantenimiento">
+				<div class="card card-primary">
+					<div class="card-header">
+						<h3 class="card-title text-center">Detalle de la Marca</h3>
 					</div>
+					<!-- /.card-header -->
+					<form th:object="${reg}">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="marca">Código</label> 
+                                <dd th:text="${reg.codigo}"></dd>
+							</div>
+
+							<div class="form-group">
+								<label for="marca">Nombre</label> 
+                                <dd th:text="${reg.nombre}"></dd>
+							</div>
+
+                            <div class="form-group">
+								<label for="marca">Estado</label> 
+                                <dd th:text="${reg.estado == 1} ? 'Activo': 'Eliminado'"></dd>
+							</div>
+						</div>
+						
+						<div class="card-footer d-flex justify-content-center">
+							<a th:href="@{/marca/editar/{codigo}(codigo = ${reg.codigo})}" class="btn btn-success mr-5">Editar
+								Marca</a>
+							<a th:href="@{/marca/listar}" class="btn btn-secondary">Volver al
+								Listado</a>
+						</div>
+					</form>
+
 				</div>
 			</div>
 		</div>
-
 	</div>
-
 	<footer class="text-center bg-dark">
 		<div class="">
 			<!-- Facebook -->
@@ -172,7 +143,6 @@
 		</div>
 		<!-- Copyright -->
 	</footer>
-
 	<!-- Font Awesome-->
 	<script src="https://kit.fontawesome.com/7eb0bd06bd.js"></script>
 
@@ -198,6 +168,5 @@
 
 	<!-- JS -->
 	<script th:src="@{/js/general.js}"></script>
-
 </body>
 </html>

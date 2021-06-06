@@ -10,11 +10,19 @@ public class Marca {
 
 	@Id
 	private String codigo;
-	
 	private String nombre;
-	
 	private int estado;
 	
+	public int getNumeroCodigo() {
+		return Integer.parseInt(codigo.substring(3));
+	}
+	
+	@Override
+	public String toString() {
+		return "Marca [codigo=" + codigo + ", nombre=" + nombre + ", estado=" + estado + "]";
+	}
+
+
 	public String getCodigo() {
 		return codigo;
 	}
@@ -33,10 +41,5 @@ public class Marca {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	@Override
-	public String toString() {
-		return "Marca [codigo=" + codigo + ", nombre=" + nombre + ", estado=" + estado + "]";
-	}
-	
 	
 }

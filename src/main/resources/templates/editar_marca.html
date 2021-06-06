@@ -90,10 +90,11 @@
 						<h3 class="card-title text-center">Editar Marca</h3>
 					</div>
 					<!-- /.card-header -->
-					<form th:action="@{guardar}" th:object="${marca}" method="post">
+					<form th:action="@{/marca/editar}" th:object="${reg}" method="post">
 						<div class="card-body">
 							<div class="form-group">
-								<label for="codigo">Código</label> <input class="form-control"
+								<label for="codigo">Código</label>
+								<input class="form-control"
 									th:field="*{codigo}" readonly="readonly" id="codigo">
 							</div>
 
@@ -122,9 +123,9 @@
 
 						</div>
 						<div class="card-footer d-flex justify-content-center">
-							<button type="submit" class="btn btn-success mr-5">Editar
+							<button type="submit" class="btn btn-success mr-5">Actualizar
 								Marca</button>
-							<a th:href="@{listar}" class="btn btn-secondary">Volver al
+							<a th:href="@{/marca/listar}" class="btn btn-secondary">Volver al
 								Listado</a>
 						</div>
 					</form>

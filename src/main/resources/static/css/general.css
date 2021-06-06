@@ -4,6 +4,10 @@ body{
     box-sizing: border-box
 }
 
+a:hover{
+	text-decoration: none;
+}
+
 .contenedor_nosotros,
 .contenedor_mantenimiento{
     margin-top: 30px !important;

@@ -2,8 +2,7 @@
 <html xmlns:th=" http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Listado de Marcas | Mundo Tecnológico</title>
-
+<title>Registrar Usuario | Mundo Tecnológico</title>
 
 <!-- Bootstrap -->
 <link rel="stylesheet"
@@ -20,10 +19,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap"
 	rel="stylesheet">
-
-</head>
 <body>
-
 	<div class="header">
 
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -86,69 +82,85 @@
 		</nav>
 
 	</div>
-
 	<div class="contenido">
-
-		<div class="contenedor_mantenimiento col-md-11 m-auto">
-			<div class="card card-primary">
-				<div class="card-header text-center">
-					<h2 class="">Listado de Productos</h2>
-					<a th:href="@{/producto/registrar}" class="btn btn-primary">Nuevo
-						Registro</a>
-				</div>
-
-				<div class="card-body">
-					<table id="dataTable" class="table table-sm table-hover dt-responsive wrap" style="width:100%">
-						<thead>
-							<tr>
-								<th style="width: 5%;">CÓDIGO</th>
-								<th style="width: 5%">FOTO</th>
-								<th class="wrap" style="width: 48%;">NOMBRE</th>
-								<th style="width: 5%;">PRECIO</th>
-								<th style="width: 5%;">STOCK</th>
-								<th style="width: 5%;">MARCA</th>
-								<th style="width: 12%;">CATEGORÍA</th>
-								<th style="width: 5%;">ESTADO</th>
-								<th style="width: 10%;">OPERACIONES</th>
-							</tr>
-						</thead>
-						<tbody>
-
-							<tr th:each="p :${listaProductos}">
-								<td th:text="${p.codigo}"></td>
-								<td><a class="popUpImage" th:href="${p.foto}">Ver Foto</a></td>
-								<td th:text="${p.nombre}"></td>
-								<td th:text="${p.precio}"></td>
-								<td th:text="${p.stock}"></td>
-								<td th:text="${p.marca.nombre}"></td>
-								<td th:text="${p.categoria.nombre}"></td>
-								<td th:text="${p.estado == 1} ? 'Activo' : 'Eliminado'" />
-								<td class="text-center"><a
-									th:href="@{editar/{codigo}(codigo = ${p.codigo})}"> <i
-										class="fas fa-edit"></i>
-								</a> <a th:href="@{/producto/detalle/{codigo}(codigo = ${p.codigo})}"
-									style="color: green"> <i class="fas fa-info-circle"></i>
-								</a> <a href="#" style="color: red"
-									th:onclick="'ConfirmarDelete(event,\'' + ${p.numeroCodigo} + '\')'">
-										<i class="fas fa-trash-alt"></i>
-								</a></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-
-			<div class="modal fade" tabindex="-1">
-				<div class="modal-dialog modal-md modal-dialog-centered">
-					<div class="modal-content">
-						<img src="" class="foto">
+		<div class="container-fluid contenedor_mantenimiento">
+			<div class="col-md-6 m-auto formulario_mantenimiento">
+				<div class="card card-primary">
+					<div class="card-header">
+						<h3 class="card-title text-center">Registrar Usuario</h3>
 					</div>
+					<!-- /.card-header -->
+					<!-- form start -->
+					<form id="formularioUsuarioRegistro" th:object="${reg}"
+						th:action="@{/usuario/registrar}" enctype="multipart/form-data"
+						method="post">
+						<div class="card-body">
+							<div class="row m-auto  col-md-12">
+								<div class="form-group col-md-12">
+									<label for="nombre">Nombre</label> <input type="text"
+										class="form-control" id="nombre" th:field="*{nombre}"
+										placeholder="Ingrese el nombre del usuario">
+								</div>
+							</div>
+							<div class="row m-auto  col-md-12">
+								<div class="form-group col-md-12">
+									<label for="descripcionn">Apellidos</label> <input type="text"
+										class="form-control" id="apellidos" th:field="*{apellidos}"
+										placeholder="Ingrese los apellidos del usuario">
+								</div>
+							</div>
+							<div class="row m-auto  col-md-12">
+								<div class="form-group col-md-12">
+									<label for="descripcionn">Correo</label> <input type="email"
+										class="form-control" id="correo" th:field="*{correo}"
+										placeholder="Ingrese correo">
+								</div>
+								<div class="form-group col-md-12">
+									<label for="descripcionn">Clave</label> <input
+										type="password" class="form-control" id="clave"
+										th:field="*{clave}" placeholder="Ingrese la clave del usuario">
+								</div>
+							</div>
+
+							<div class="row m-auto  col-md-12">
+
+								<div class="form-group col-md-6">
+									<label for="marca">Tipo de Usuario</label> <select class="custom-select"
+										id="usuario" th:field="*{codigo_tipo_usuario}">
+										<option value="">Seleccione</option>
+										<option value="TPU0001">Administrador</option>
+										<option value="TPU0002">Cliente</option>
+									</select>
+								</div>
+
+
+								<div class="form-group col-md-6">
+									<label for="estado">Estado</label> <select
+										class="custom-select" id="estado" th:field="*{estado}">
+										<option th:value="0" th:text="Seleccione" th:selected="true"
+											disabled="disabled" />
+										<option th:value="1" th:text="Activo" th:selected="false" />
+										<option th:value="2" th:text="Eliminado" th:selected="false" />
+									</select>
+								</div>
+
+							</div>
+
+						</div>
+						<!-- /.card-body -->
+						<div class="card-footer d-flex justify-content-center">
+							<button type="submit" class="btn btn-success mr-5">Registrar
+								Usuario</button>
+							<a th:href="@{/usuario/listar}" class="btn btn-secondary">Volver
+								al Listado</a>
+						</div>
+					</form>
 				</div>
+				<!-- /.card -->
 			</div>
 		</div>
-
+		<!-- /.container-fluid -->
 	</div>
-
 	<footer class="text-center bg-dark">
 		<div class="">
 			<!-- Facebook -->
@@ -172,7 +184,6 @@
 		</div>
 		<!-- Copyright -->
 	</footer>
-
 	<!-- Font Awesome-->
 	<script src="https://kit.fontawesome.com/7eb0bd06bd.js"></script>
 
@@ -198,6 +209,5 @@
 
 	<!-- JS -->
 	<script th:src="@{/js/general.js}"></script>
-
 </body>
 </html>
