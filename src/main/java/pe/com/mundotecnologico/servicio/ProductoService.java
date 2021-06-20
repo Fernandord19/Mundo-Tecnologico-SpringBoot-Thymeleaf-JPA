@@ -13,5 +13,6 @@ public interface ProductoService {
 	public abstract Producto buscarProducto(String codigo);
 	public abstract String generarCodigo();
 	public abstract String generarCodigo(int numeroCodigo);
+	public abstract List<Producto> filtrarProductos(String criterio, String filtro);
 	
 }

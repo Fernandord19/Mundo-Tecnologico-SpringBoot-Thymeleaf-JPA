@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th=" http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Catálogo | Mundo Tecnológico</title>
+</head>
+<body>
+
+	<div th:insert="fragmentos/header :: header"></div>
+
+	<div class="contenido">
+
+		<form class="container busqueda">
+			<div
+				class="form-group  pr-3 pl-3 row d-flex justify-content-around flex-wrap">
+				<label class="col-form-label mt-1">Filtrar productos por: </label> <select
+					class="custom-select col-sm-3 mt-1" name="criterio">
+					<option value="nombre" th:selected="${criterio.equals('nombre')}">Nombre</option>
+					<option value="categoria"
+						th:selected="${criterio.equals('categoria')}">Categoria</option>
+					<option value="marca" th:selected="${criterio.equals('marca')}">Marca</option>
+				</select> <input class="form-control col-sm-3 mt-1" name="filtro"
+					placeholder="Ingrese el valor a filtrar" th:value="${filtro}" />
+				<button type="submit" class="btn btn-secondary col-sm-3 mt-1">Filtrar</button>
+			</div>
+		</form>
+
+		<div class="container">
+
+			<table class="w-100">
+				<tr
+					class="text-center w-100 d-flex justify-content-center flex-wrap">
+
+					<td th:each="p :${listaProductos}" width="30%"
+						class="detalle-catalogo m-2">
+						<table class="w-100 producto">
+							<tr class="cabecera-catalogo">
+								<td th:text="${p.nombre}"></td>
+							</tr>
+							<tr>
+								<td><img th:src="${p.foto}" class="catalogo" /></td>
+							</tr>
+							<tr>
+								<td>Precio Unitario: <strong th:text="'S/. ' + ${p.precio}">S/.
+										</strong></td>
+							</tr>
+							<tr>
+								<td>Stock: <strong th:text="${p.stock + ' unidades'}"></strong></td>
+							</tr>
+							<tr>
+								<td><a class="btn btn-primary" th:href="@{detalleAgregar}">Ver Producto</a></td>
+							</tr>
+							<tr>
+								<td><br /></td>
+							</tr>
+						</table>
+					</td>
+
+				</tr>
+
+			</table>
+
+			<div class="text-center" th:if="${listaProductos.size >= 0}">
+
+
+
+				<div></div>
+
+
+
+			</div>
+
+
+			<div class="alert alert-danger text-center"
+				th:if="${listaProductos.size == 0}" role="alert">
+				<strong> No hay productos que coincidan con la búsqueda </strong>
+			</div>
+
+		</div>
+
+
+	</div>
+
+	<div th:insert="fragmentos/footer :: footer"></div>
+
+
+</body>
+</html>

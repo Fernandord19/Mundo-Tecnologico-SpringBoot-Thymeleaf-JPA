@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import pe.com.mundotecnologico.modelo.Marca;
@@ -17,7 +18,7 @@ public class MarcaServiceImpl implements MarcaService {
 	
 	@Override
 	public List<Marca> listarMarcas() {
-		return repo.findAll();
+		return repo.findAll(Sort.by(Sort.Direction.ASC, "nombre"));
 	}
 
 	@Override

@@ -13,6 +13,7 @@ $('.custom-file-input').on('change', function (event) {
         .html(inputFile.files[0].name);
 }); 
 
+
 $(document).on('click', '.number-spinner button', function () {
     var btn = $(this),
         oldValue = btn.closest('.number-spinner').find('input').val().trim(),

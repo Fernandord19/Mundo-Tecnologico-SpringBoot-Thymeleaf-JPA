@@ -62,4 +62,10 @@ public class ProductoServiceImpl implements ProductoService {
 		return codigo;
 	}
 
+	
+	@Override
+	public List<Producto> filtrarProductos(String criterio, String filtro) {
+		return repo.filtrarProductos(criterio, filtro);
+	}
+
 }
