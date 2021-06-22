@@ -40,6 +40,7 @@ public class UsuarioController {
 	public String registrar(@ModelAttribute Usuario reg, RedirectAttributes redirectAttrs) {
 
 		reg.setCodigo(usuarioService.generarCodigo());
+		reg.setClave(new Encrypt().getAES(reg.getClave()));
 		if (usuarioService.registraActualizaUsuario(reg) != null) {
 			redirectAttrs
             .addFlashAttribute("mensaje", "Usuario '" + reg.getCodigo() + "' registrado correctamente.")
@@ -53,6 +54,32 @@ public class UsuarioController {
 		}
 	}
 
+	@GetMapping("/nuevoUsuario")
+	public String registroPersonal(Model model) {
+		model.addAttribute("reg", new Usuario());
+		return "nuevo_usuario";
+	}
+
+	@PostMapping("/nuevoUsuario")
+	public String registroPersonal(@ModelAttribute Usuario reg, RedirectAttributes redirectAttrs) {
+
+		reg.setCodigo(usuarioService.generarCodigo());
+		reg.setClave(new Encrypt().getAES(reg.getClave()));
+		reg.setEstado(1);
+		reg.setCodigo_tipo_usuario("TPU0002");
+		if (usuarioService.registraActualizaUsuario(reg) != null) {
+			redirectAttrs
+            .addFlashAttribute("mensaje", "Usuario '" + reg.getCodigo() + "' registrado correctamente.")
+            .addFlashAttribute("clase", "success");
+			return "redirect:/home/login";
+		} else {
+			redirectAttrs
+            .addFlashAttribute("mensaje", "Hubo un error al registrar")
+            .addFlashAttribute("clase", "danger");
+			return "redirect:/usuario/nuevoUsuario";
+		}
+	}
+	
 	@GetMapping("/editar/{codigo}")
 	public String editar(@PathVariable("codigo") String codigo, Model model) {
 		model.addAttribute("reg", usuarioService.buscarUsuario(codigo));
@@ -127,4 +154,9 @@ public class UsuarioController {
 		return "redirect:/usuario/listar";
 	}
 
+	@RequestMapping("/cerrar")
+	public String cerrar(HttpSession session) {
+		session.invalidate();
+		return "redirect:/home/login";
+	}
 }

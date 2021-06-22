@@ -43,7 +43,7 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="/home/nosotros">Nosotros</a>
 					</li>
-					<li class="nav-item dropdown"><a
+					<li class="nav-item dropdown" th:if="${session.usuario}"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">Mantenimiento</a>
@@ -54,7 +54,7 @@
 								class="dropdown-item" href="/categoria/listar">Categorías</a> <a
 								class="dropdown-item" href="/marca/listar">Marcas</a>
 						</div></li>
-					<li class="nav-item dropdown"><a
+					<li class="nav-item dropdown" th:if="${session.usuario}"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">Reportes</a>
@@ -78,7 +78,7 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="#">Mi Cuenta</a> <a
 								class="dropdown-item"
-								href="ServletUsuario?operacion=cerrarSesion">Cerrar Sesión</a>
+								th:href="@{/usuario/cerrar}">Cerrar Sesión</a>
 						</div></li>
 
 

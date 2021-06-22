@@ -66,7 +66,7 @@
 					<button type="submit" class="btn btn-primary">
 						<i class="fas fa-sign-in-alt"></i> Iniciar Sesión
 					</button>
-					<br /> <a href="@Url.Action("RegistroPersonal", "Usuarios")">Registrate
+					<br /> <a th:href="@{/usuario/nuevoUsuario}">Registrate
 						Ahora</a>
 				</div>
 
@@ -75,26 +75,6 @@
 	</div>
 	<!-- Font Awesome-->
 	<script src="https://kit.fontawesome.com/7eb0bd06bd.js"></script>
-
-	<!-- JQuery -->
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
-	<!-- Bootstrap -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-
-	<!-- DataTables  & Plugins -->
-	<script th:src="@{/js/jquery.dataTables.js}"></script>
-	<script th:src="@{/js/dataTables.bootstrap4.js}"></script>
-	<script th:src="@{/js/dataTables.responsive.js}"></script>
-	<script th:src="@{/js/responsive.bootstrap4.js}"></script>
-
-	<!-- jquery-validation -->
-	<script th:src="@{/js/jquery.validate.js}"></script>
-	<script th:src="@{/js/additional-methods.js}"></script>
-
-	<!-- Swee Alert -->
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<!-- JS -->
 	<script th:src="@{/js/general.js}"></script>
