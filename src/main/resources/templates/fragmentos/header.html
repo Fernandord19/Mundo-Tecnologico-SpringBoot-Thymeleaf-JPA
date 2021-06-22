@@ -38,7 +38,8 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link" href="/home">Inicio</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/ecommerce/catalogo(criterio='', filtro = '')}">Catálogo</a>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/ecommerce/catalogo(criterio='nombre', filtro = '')}">Catálogo</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="/home/nosotros">Nosotros</a>
 					</li>
@@ -48,36 +49,42 @@
 						aria-expanded="false">Mantenimiento</a>
 
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="/producto/listar">Productos</a>
-							<a class="dropdown-item" href="/usuario/listar">Usuarios</a>
-							<a class="dropdown-item" href="/categoria/listar">Categorías</a>
-							<a class="dropdown-item" href="/marca/listar">Marcas</a>
+							<a class="dropdown-item" href="/producto/listar">Productos</a> <a
+								class="dropdown-item" href="/usuario/listar">Usuarios</a> <a
+								class="dropdown-item" href="/categoria/listar">Categorías</a> <a
+								class="dropdown-item" href="/marca/listar">Marcas</a>
 						</div></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">Reportes</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">Productos</a> <a
+							<a class="dropdown-item" target="_blank"
+								href="/reporte/ReporteProductos">Productos</a> <a
 								class="dropdown-item" href="#">Ventas</a> <a
-								class="dropdown-item" target="_blank" href="/reporte/ReporteUsuarios">Usuarios</a> <a
-								class="dropdown-item" href="#">Clientes</a>
+								class="dropdown-item" target="_blank"
+								href="/reporte/ReporteUsuarios">Usuarios</a>
 						</div></li>
 
 				</ul>
 				<ul class="navbar-nav ml-auto">
 
-					<li class="nav-item dropdown mr-auto"><a
+					<li class="nav-item dropdown mr-auto"
+						th:if="${session.usuario != null}"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> <i class="fas fa-user"></i> Iniciar
-							Sesión
+						aria-expanded="false" th:text="${session.usuario.NombreCompleto}">
 					</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="#">Mi Cuenta</a> <a
 								class="dropdown-item"
 								href="ServletUsuario?operacion=cerrarSesion">Cerrar Sesión</a>
 						</div></li>
+
+
+					<li class="nav-item"><a th:href="@{/home/login}" class="nav-link" th:if="${session.usuario == null}"><i
+							class="fas fa-user"></i> Iniciar Sesión</a></li>
+
 				</ul>
 			</div>
 		</nav>

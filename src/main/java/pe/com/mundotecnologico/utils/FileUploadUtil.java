@@ -12,7 +12,7 @@ public class FileUploadUtil {
 
 		String directorioBase = getDirectorioBase();
 
-		Path uploadPath = Paths.get(directorioBase + "\\src\\main\\resources\\static\\img");
+		Path uploadPath = Paths.get(directorioBase + "\\src\\main\\resources\\static\\img\\productos");
 
 		if (!Files.exists(uploadPath)) {
 			Files.createDirectories(uploadPath);

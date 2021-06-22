@@ -23,7 +23,11 @@ public class CategoriaServiceImpl implements CategoriaService{
 
 	@Override
 	public Categoria registraActualizaCategoria(Categoria reg) {
-		return repo.save(reg);
+		try {
+			return repo.save(reg);
+		} catch (Exception e) {
+			return null;
+		} 
 	}
 
 	@Override

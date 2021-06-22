@@ -21,4 +21,8 @@ public interface UsuarioService {
 
 	public abstract String generarCodigo(int numeroCodigo);
 	
+	Usuario validarUsuario(String correo, String clave);
+	
+	int restablecerClave(String clave, String codigo);
+	
 }

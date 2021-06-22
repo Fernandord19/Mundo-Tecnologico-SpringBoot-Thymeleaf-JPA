@@ -28,7 +28,12 @@ public class MarcaServiceImpl implements MarcaService {
 
 	@Override
 	public Marca regActMarca(Marca reg) {
-		return repo.save(reg);
+		try {
+			return repo.save(reg);
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 
 	@Override

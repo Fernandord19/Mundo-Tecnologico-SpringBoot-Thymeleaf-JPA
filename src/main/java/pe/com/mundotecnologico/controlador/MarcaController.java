@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.com.mundotecnologico.modelo.Marca;
 import pe.com.mundotecnologico.servicio.MarcaService;
@@ -32,11 +33,20 @@ public class MarcaController {
 	}
 	
 	@PostMapping("/registrar")
-	public String registrar(@ModelAttribute Marca reg, Model model) {
+	public String registrar(@ModelAttribute Marca reg, Model model, RedirectAttributes redirectAttrs) {
 		reg.setCodigo(marcaService.generarCodigo());
 		
-		marcaService.regActMarca(reg);
-		return "redirect:/marca/listar";
+		if (marcaService.regActMarca(reg) != null) {
+			redirectAttrs
+            .addFlashAttribute("mensaje", "Marca '" + reg.getCodigo() + "' registrada correctamente.")
+            .addFlashAttribute("clase", "success");
+			return "redirect:/marca/listar";
+		} else {
+			redirectAttrs
+            .addFlashAttribute("mensaje", "Hubo un error al registrar")
+            .addFlashAttribute("clase", "danger");
+			return "redirect:/marca/listar";
+		}
 	}
 	
 	@GetMapping("/editar/{codigo}")
@@ -46,9 +56,18 @@ public class MarcaController {
 	}
 	
 	@PostMapping("/editar")
-	public String editar(@ModelAttribute Marca reg) {
-		marcaService.regActMarca(reg);
-		return "redirect:/marca/listar";
+	public String editar(@ModelAttribute Marca reg, RedirectAttributes redirectAttrs) {
+		if (marcaService.regActMarca(reg) != null) {
+			redirectAttrs
+            .addFlashAttribute("mensaje", "Marca '" + reg.getCodigo() + "' editada correctamente.")
+            .addFlashAttribute("clase", "success");
+			return "redirect:/marca/listar";
+		} else {
+			redirectAttrs
+            .addFlashAttribute("mensaje", "Hubo un error al editar")
+            .addFlashAttribute("clase", "danger");
+			return "redirect:/marca/listar";
+		}
 	}
 	
 	

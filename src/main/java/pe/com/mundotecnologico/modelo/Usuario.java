@@ -76,7 +76,15 @@ public class Usuario {
 	public void setCodigo_tipo_usuario(String codigo_tipo_usuario) {
 		this.codigo_tipo_usuario = codigo_tipo_usuario;
 	}
+	
+	public String getNombreCompleto() {
+		return this.nombre + " " + this.apellidos;
+	}
 
-	
-	
+	@Override
+	public String toString() {
+		return "Usuario [codigo=" + codigo + ", nombre=" + nombre + ", apellidos=" + apellidos + ", correo=" + correo
+				+ ", clave=" + clave + ", estado=" + estado + ", codigo_tipo_usuario=" + codigo_tipo_usuario + "]";
+	}
+
 }

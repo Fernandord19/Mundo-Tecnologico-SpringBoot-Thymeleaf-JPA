@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th=" http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Restablecimiento de Clave | Mundo Tecnológico</title>
+</head>
+<body>
+
+	<div th:insert="fragmentos/header :: header"></div>
+	<div class="contenido">
+
+		<div class="container-fluid contenedor_mantenimiento">
+			<div class="col-md-4 m-auto formulario_mantenimiento">
+				<div class="card card-primary">
+					<div class="card-header">
+						<h3 class="card-title text-center">Restablecer Clave</h3>
+					</div>
+					<!-- /.card-header -->
+					<!-- form start -->
+					<form id="formularioUsuario" th:action="@{/usuario/restablecer}" method="post">
+						<input type="hidden" name="codigo" th:value="${codigo}">
+						<div class="card-body">
+							<div class="row m-auto col-md-12">
+
+								<div class="form-group col-md-9 m-auto">
+									<label for="nombre">Nueva Clave</label> <input type="password"
+										class="form-control" id="nuevaClave" name="clave"
+										placeholder="Introduzca la nueva clave del usuario">
+								</div>
+
+							</div>
+
+							<div class="row m-auto  col-md-12">
+								<div class="form-group col-md-9 m-auto">
+									<label for="apellidos">Confirmar Clave</label> <input
+										type="password" class="form-control" id="confirmaClave"
+										name="confirmaClave"
+										placeholder="Introduzca la nueva contraseña otra vez">
+								</div>
+							</div>
+							<!-- /.card-body -->
+							<div class="card-footer mt-4 d-flex justify-content-center">
+								<button type="submit" class="btn btn-success mr-5">Guardar
+									Cambios</button>
+								<a th:href="@{/usuario/listar}" class="btn btn-secondary">Volver al
+									Listado</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	
+	<div th:insert="fragmentos/footer :: footer"></div>
+
+</body>
+</html>

@@ -11,30 +11,250 @@ $('.custom-file-input').on('change', function (event) {
     $(inputFile).parent()
         .find('.custom-file-label')
         .html(inputFile.files[0].name);
-}); 
-
+});
 
 $(document).on('click', '.number-spinner button', function () {
     var btn = $(this),
         oldValue = btn.closest('.number-spinner').find('input').val().trim(),
         newVal = 0;
 
-    if (btn.attr('data-dir') == 'up') {
+    if (btn.attr('data-dir') == 'up' && (btn.attr('data-dir') == 'up' && parseInt(btn.closest('.number-spinner').find('input').attr('max'), 10) > parseInt(btn.closest('.number-spinner').find('input').val(), 10))) {
         newVal = parseInt(oldValue) + 1;
-    } else {
+    } else if (btn.attr('data-dir') == 'dwn') {
         if (oldValue > 1) {
             newVal = parseInt(oldValue) - 1;
         } else {
             newVal = 1;
         }
+    } else {
+        newVal = parseInt(oldValue);
+        alert('Ha alcanzado el stock máximo')
     }
     btn.closest('.number-spinner').find('input').val(newVal);
+});
+
+$(document).on('click', '.editarCarrito', function () {
+    var a = $(this),
+        cantidad = a.closest('tr').find('input').val().trim(),
+        codigo = a.closest('tr').find('#codigo').html();
+    parent.location.href = "EditarCarr" + "?codigo=" + codigo + "&cantidad=" + cantidad;
 });
 
 $(function () {
     $('#dataTable').DataTable({
         "order": [[0, "asc"]],
         "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
+    });
+
+
+    $('#dataTableVenta').DataTable({
+        "order": [[1, "desc"]],
+        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
+    });
+});
+
+$(function () {
+    $('#tablaDetalle').DataTable({
+        "order": [[0, "asc"]],
+        "lengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]]
+    });
+
+});
+
+$(function () {
+    $('#formularioUsuario').validate({
+        rules: {
+            nombre: {
+                required: true,
+                minlength: 3,
+                maxlength: 30
+            },
+            apellidos: {
+                required: true,
+                minlength: 5,
+                maxlength: 30
+            },
+            documento: {
+                required: true,
+                digits: true,
+                minlength: 8,
+                maxlength: 8,
+            },
+            celular: {
+                required: true,
+                digits: true,
+                minlength: 9,
+                maxlength: 9,
+            },
+            correo: {
+                required: true,
+                email: true,
+                minlength: 10,
+                maxlength: 100
+            },
+            clave: {
+                required: true,
+                minlength: 5
+            },
+            nuevaClave: {
+                required: true,
+                minlength: 5,
+            },
+            confirmaClave: {
+                required: true,
+                minlength: 5,
+                equalTo: "#nuevaClave"
+            },
+            estado: {
+                required: true,
+            },
+            codigoTipoUsuario: {
+                required: true,
+            }
+        },
+        messages: {
+            nombre: {
+                required: "Este campo es obligatorio",
+                minlength: "El nombre debe tener mínimo 3 caracteres",
+                maxlength: "El nombre debe tener máximo 30 caracteres"
+            },
+            apellidos: {
+                required: "Este campo es obligatorio",
+                minlength: "El apellido debe tener mínimo 3 caracteres",
+                maxlength: "El apellido debe tener máximo 30 caracteres"
+            },
+            documento: {
+                required: "Este campo es obligatorio",
+                minlength: "El documento debe tener 8 digitos",
+                maxlength: "El documento debe tener 9 digitos",
+                digits : "Deben ser digitos"
+            },
+            celular: {
+                required: "Este campo es obligatorio",
+                minlength: "El documento debe tener 9 digitos",
+                maxlength: "El documento debe tener 9 digitos",
+                digits: "Deben ser digitos"
+            },
+            correo: {
+                email: "Ingrese un correo electrónico válido",
+                required: "Este campo es obligatorio",
+                minlength: "El correo debe tener mínimo 10 caracteres",
+                maxlength: "El correo debe tener máximo 100 caracteres"
+            },
+            clave: {
+                required: "Este campo es obligatorio",
+                minlength: "La clave debe tener mínimo 5 caracteres",
+            },
+            nuevaClave: {
+                required: "Este campo es obligatorio",
+                minlength: "La clave debe tener mínimo 5 caracteres",
+                
+            },
+            confirmaClave: {
+                required: "Este campo es obligatorio",
+                equalTo: "Las claves deben coincidir",
+                minlength: "La clave debe tener mínimo 5 caracteres",
+            },
+            estado: {
+                required: "Este campo es obligatorio"
+            },
+            codigoTipoUsuario: {
+                required: "Este campo es obligatorio"
+            },
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+    });
+});
+
+$(function () {
+    $('#formularioCategoria').validate({
+        rules: {
+            nombre: {
+                required: true,
+                minlength: 4,
+                maxlength: 30
+            },
+            estado: {
+                required: true,
+            }
+        },
+        messages: {
+            nombre: {
+                required: "Este campo es obligatorio",
+                minlength: "El nombre debe tener mínimo 4 caracteres",
+                maxlength: "El nombre debe tener máximo 30 caracteres"
+            },
+            estado: {
+                required: "Este campo es obligatorio",
+            },
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+    });
+});
+
+$(function () {
+    $('#formularioVenta').validate({
+        rules: {
+            direccion: {
+                required: true,
+                minlength: 15,
+                maxlength: 100
+            },
+            referencia: {
+                required: true,
+                minlength: 15,
+                maxlength: 100
+            },
+            codigoDistrito: {
+                required: true,
+            }
+        },
+        messages: {
+            direccion: {
+                required: "Este campo es obligatorio",
+                minlength: "El nombre debe tener mínimo 15 caracteres",
+                maxlength: "El nombre debe tener máximo 100 caracteres"
+            },
+            referencia: {
+                required: "Este campo es obligatorio",
+                minlength: "El nombre debe tener mínimo 15 caracteres",
+                maxlength: "El nombre debe tener máximo 100 caracteres"
+            },
+            codigoDistrito: {
+                required: "Este campo es obligatorio",
+            },
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
     });
 });
 
@@ -53,7 +273,7 @@ $(function () {
             },
             precio: {
                 required: true,
-                number:true,
+                number: true,
                 min: 1
             },
             stock: {
@@ -130,7 +350,31 @@ function ConfirmarDelete(e, codigo) {
                 showConfirmButton: false,
                 timer: 1500
             })
-            setTimeout(function () { window.location.href = 'eliminar/' + codigo ; }, 1500);
+            setTimeout(function () { window.location.href = 'Eliminar/' + codigo; }, 1500);
+        }
+    })
+}
+
+function ConfirmarDeleteCarrito(e, codigo) {
+    e.preventDefault();
+    Swal.fire({
+        title: '¿Seguro que deseas eliminar el producto del carrito?',
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡Sí, Elimínalo!',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Se eliminó el producto del carrito',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            setTimeout(function () { window.location.href = 'Eliminar/' + codigo; }, 1500);
         }
     })
 }
@@ -138,7 +382,7 @@ function ConfirmarDelete(e, codigo) {
 $(function () {
     $('#formularioProductoRegistro').validate({
         rules: {
-            fotoProducto: {
+            foto: {
                 required: true
             },
             nombre: {
@@ -159,20 +403,20 @@ $(function () {
             stock: {
                 required: true,
                 number: true,
-                min: 0
+                min: 0,
             },
-            marca: {
+            codigoMarca: {
                 required: true,
             },
-            categoria: {
+            codigoCategoria: {
                 required: true,
             },
-             estado: {
-            	required: true,
+            estado: {
+                required: true,
             }
         },
         messages: {
-            fotoProducto: {
+            foto: {
                 required: "Este campo es obligatorio"
             },
             nombre: {
@@ -195,13 +439,13 @@ $(function () {
                 min: "El stock debe ser mayor o igual que 0",
                 number: "Debe ingresar un número entero"
             },
-            marca: {
+            codigoMarca: {
                 required: "Este campo es obligatorio"
             },
-            categoria: {
+            codigoCategoria: {
                 required: "Este campo es obligatorio"
             },
-             estado: {
+            estado: {
                 required: "Este campo es obligatorio"
             },
         },
@@ -228,43 +472,7 @@ $(function () {
                 maxlength: 30
             },
             estado: {
-            	required: true,
-            }
-        },
-        messages: {
-            nombre: {
-                required: "Este campo es obligatorio",
-                minlength: "El nombre debe tener mínimo 2 caracteres",
-                maxlength: "El nombre debe tener máximo 30 caracteres"
-            },
-            estado: {
-                required: "Este campo es obligatorio",
-            },
-        },
-        errorElement: 'span',
-        errorPlacement: function (error, element) {
-            error.addClass('invalid-feedback');
-            element.closest('.form-group').append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).removeClass('is-invalid');
-        }
-    });
-});
-
-$(function () {
-    $('#formularioCategoria').validate({
-        rules: {
-            nombre: {
                 required: true,
-                minlength: 2,
-                maxlength: 30
-            },
-            estado: {
-            	required: true,
             }
         },
         messages: {
@@ -290,7 +498,6 @@ $(function () {
         }
     });
 });
-
 
 $(function () {
     $('#formularioLogin').validate({

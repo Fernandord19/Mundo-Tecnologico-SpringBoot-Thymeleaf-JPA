@@ -17,7 +17,12 @@ public class UsuarioServieImpl implements UsuarioService{
 
 	@Override
 	public Usuario registraActualizaUsuario(Usuario reg) {
-		return repo.save(reg);
+		try {
+			return repo.save(reg);
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 
 	@Override
@@ -61,5 +66,15 @@ public class UsuarioServieImpl implements UsuarioService{
 		}
 		return codigo;
 	}
-	
+
+	@Override
+	public Usuario validarUsuario(String correo, String clave) {
+		return repo.validarUsuario(correo, clave);
+	}
+
+	@Override
+	public int restablecerClave(String clave, String codigo) {
+		return repo.restablecerClave(clave, codigo);
+	}
+
 }

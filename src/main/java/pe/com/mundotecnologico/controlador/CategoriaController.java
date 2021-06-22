@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.com.mundotecnologico.modelo.Categoria;
 import pe.com.mundotecnologico.servicio.CategoriaService;
@@ -32,11 +33,19 @@ public class CategoriaController {
 	}
 	
 	@PostMapping("/registrar")
-	public String registrar(@ModelAttribute Categoria reg) {
-		
+	public String registrar(@ModelAttribute Categoria reg, RedirectAttributes redirectAttrs) {
 		reg.setCodigo(categoriaService.generarCodigo());
-		categoriaService.registraActualizaCategoria(reg);
-		return "redirect:/categoria/listar";
+		if (categoriaService.registraActualizaCategoria(reg) != null) {
+			redirectAttrs
+            .addFlashAttribute("mensaje", "Categoria '" + reg.getCodigo() + "' registrada correctamente.")
+            .addFlashAttribute("clase", "success");
+			return "redirect:/categoria/listar";
+		} else {
+			redirectAttrs
+            .addFlashAttribute("mensaje", "Hubo un error al editar")
+            .addFlashAttribute("clase", "danger");
+			return "redirect:/categoria/listar";
+		}
 		
 	}
 	
@@ -47,11 +56,18 @@ public class CategoriaController {
 	}
 	
 	@PostMapping("/editar")
-	public String editar(@ModelAttribute Categoria reg) {
-
-		categoriaService.registraActualizaCategoria(reg);
-		return "redirect:/categoria/listar";
-		
+	public String editar(@ModelAttribute Categoria reg, RedirectAttributes redirectAttrs) {
+		if (categoriaService.registraActualizaCategoria(reg) != null) {
+			redirectAttrs
+            .addFlashAttribute("mensaje", "Categoria '" + reg.getCodigo() + "' editada correctamente.")
+            .addFlashAttribute("clase", "success");
+			return "redirect:/categoria/listar";
+		} else {
+			redirectAttrs
+            .addFlashAttribute("mensaje", "Hubo un error al editar")
+            .addFlashAttribute("clase", "danger");
+			return "redirect:/categoria/listar";
+		}
 	}
 	
 	@GetMapping("/detalle/{codigo}")

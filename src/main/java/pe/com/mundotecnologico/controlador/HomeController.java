@@ -16,5 +16,10 @@ public class HomeController {
 	public String nosotros() {
 		return "nosotros";
 	}
+	
+	@RequestMapping("login")
+	public String login() {
+		return "login";
+	}
 
 }

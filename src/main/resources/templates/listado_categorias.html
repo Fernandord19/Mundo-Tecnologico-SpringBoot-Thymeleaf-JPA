@@ -20,7 +20,10 @@
 						Registro</a>
 				</div>
 				<div class="card-body">
-				
+					<div th:classappend="'text alert alert-' + (${clase})"
+						th:if="${mensaje}" role="alert">
+						<strong th:text="${mensaje}"></strong>
+					</div>
 					<table id="dataTable"
 						class="table table-sm table-hover dt-responsive wrap"
 						style="width: 100%">
@@ -33,22 +36,21 @@
 							</tr>
 						</thead>
 						<tbody>
-							
+
 							<tr th:each="c: ${listaCategorias}">
 								<td th:text="${c.codigo}"></td>
 								<td th:text="${c.nombre}"></td>
 								<td th:text="${c.estado == 1} ? 'Activo' : 'Eliminado'"></td>
-								<td class="text-center">
-									<a th:href="@{/categoria/editar/{codigo}(codigo=${c.codigo})}">
+								<td class="text-center"><a
+									th:href="@{/categoria/editar/{codigo}(codigo=${c.codigo})}">
 										<i class="fas fa-edit"></i>
-									</a>
-									<a style="color: green" th:href=@{/categoria/detalle/{codigo}(codigo=${c.codigo})}>
+								</a> <a style="color: green"
+									th:href=@{/categoria/detalle/{codigo}(codigo=${c.codigo})}>
 										<i class="fas fa-info-circle"></i>
-									</a> 
-									<a href="#" style="color: red" th:onclick="'ConfirmarDelete(event,\'' + ${c.numeroCodigo} + '\')'"> 
+								</a> <a href="#" style="color: red"
+									th:onclick="'ConfirmarDelete(event,\'' + ${c.numeroCodigo} + '\')'">
 										<i class="fas fa-trash-alt"></i>
-									</a>
-								</td>
+								</a></td>
 							</tr>
 
 						</tbody>

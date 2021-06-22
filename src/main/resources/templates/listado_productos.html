@@ -13,6 +13,7 @@
 
 		<div class="contenedor_mantenimiento col-md-11 m-auto">
 			<div class="card card-primary">
+
 				<div class="card-header text-center">
 					<h2 class="">Listado de Productos</h2>
 					<a th:href="@{/producto/registrar}" class="btn btn-primary">Nuevo
@@ -20,7 +21,13 @@
 				</div>
 
 				<div class="card-body">
-					<table id="dataTable" class="table table-sm table-hover dt-responsive wrap" style="width:100%">
+					<div th:classappend="'text alert alert-' + (${clase})"
+						th:if="${mensaje}" role="alert">
+						<strong th:text="${mensaje}"></strong>
+					</div>
+					<table id="dataTable"
+						class="table table-sm table-hover dt-responsive wrap"
+						style="width: 100%">
 						<thead>
 							<tr>
 								<th style="width: 5%;">CÓDIGO</th>
@@ -48,7 +55,8 @@
 								<td class="text-center"><a
 									th:href="@{editar/{codigo}(codigo = ${p.codigo})}"> <i
 										class="fas fa-edit"></i>
-								</a> <a th:href="@{/producto/detalle/{codigo}(codigo = ${p.codigo})}"
+								</a> <a
+									th:href="@{/producto/detalle/{codigo}(codigo = ${p.codigo})}"
 									style="color: green"> <i class="fas fa-info-circle"></i>
 								</a> <a href="#" style="color: red"
 									th:onclick="'ConfirmarDelete(event,\'' + ${p.numeroCodigo} + '\')'">

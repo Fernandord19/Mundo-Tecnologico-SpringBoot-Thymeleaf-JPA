@@ -42,13 +42,14 @@
 							</tr>
 							<tr>
 								<td>Precio Unitario: <strong th:text="'S/. ' + ${p.precio}">S/.
-										</strong></td>
+								</strong></td>
 							</tr>
 							<tr>
 								<td>Stock: <strong th:text="${p.stock + ' unidades'}"></strong></td>
 							</tr>
 							<tr>
-								<td><a class="btn btn-primary" th:href="@{detalleAgregar}">Ver Producto</a></td>
+								<td><a class="btn btn-primary" th:href="@{detalleAgregar}">Ver
+										Producto</a></td>
 							</tr>
 							<tr>
 								<td><br /></td>
@@ -62,11 +63,20 @@
 
 			<div class="text-center" th:if="${listaProductos.size >= 0}">
 
+				<div>
 
+					<a class="btn btn-secondary" th:text="'|<'"
+						th:href="@{catalogo(criterio=${criterio}, filtro = ${filtro}, pagInicio =${pagInicio}, f = 'inicio')}"></a>
+					<a class="btn btn-secondary" th:text="'<'"
+						th:href="@{catalogo(criterio=${criterio}, filtro = ${filtro}, pagInicio =${pagInicio}, f = 'izquierda')}"></a>
+					<label class="btn btn-primary mt-2"
+						th:text="'Página ' + ${pagInicio +1} + ' de ' + ${numPaginas}"></label>
+					<a class="btn btn-secondary" th:text="'>'"
+						th:href="@{catalogo(criterio=${criterio}, filtro = ${filtro}, pagInicio =${pagInicio}, f = 'derecha')}"></a>
+					<a class="btn btn-secondary" th:text="'>|'"
+						th:href="@{catalogo(criterio=${criterio}, filtro = ${filtro}, pagInicio =${pagInicio}, f = 'fin')}"></a>
 
-				<div></div>
-
-
+				</div>
 
 			</div>
 
